@@ -19,15 +19,42 @@ public class GradeCalculator{
 			System.exit(1);
 		}
 		getUsers(savedUsers);
+		
 		System.out.println("Grants Grade Generator");
 		System.out.print("Username: ");
 		String userName = userIn.next().trim();	
 		while(!users.containsKey(userName)) {
-			System.out.println("User not found try again");
+			System.out.print("User not found try again\nUsername: ");
 			userName = userIn.next().trim();
 		}
-		System.out.println("User Found!");
+		
+		System.out.print(" > ");
+		while (userIn.hasNext()) {
+			String cmd = userIn.nextLine().toLowerCase().trim();
+			if (cmd.equals("get current grades")) {
+				System.out.println(users.get(cmd));
+			}
+			else if (cmd.equals("help")) {
+				System.out.println("This is your help.");
+			}
+			else if (cmd.equals("quit")) {
+				String ans = "invalid";
+				while (!ans.equals("Y") && !ans.equals("N")) {
+					System.out.print("Are you sure you want to quit? (Y/N) ");
+					ans = userIn.next().trim();
+				}
+				if (ans.equals("Y")) {
+					System.exit(1);
+				}
+				else {
+					System.out.print(" > ")
+					continue;
+				}
+			}
+			System.out.print(" > ");
+		}
 	}
+	
 	private static void getUsers(Scanner savedUsers) {
 		while (savedUsers.hasNextLine()) {
 			String line = savedUsers.nextLine().trim();
